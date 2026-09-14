@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Reject credential artifacts
+        run: |
+          ! git ls-files | grep -E '(^|/)auth(\..*)?\.json$|(^|/)registry\.json$'
+      - name: Test without real credentials
+        run: python3 test_accounts.py

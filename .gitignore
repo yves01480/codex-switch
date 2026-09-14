@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+auth.json
+auth.*.json
+registry.json
+.codex-accounts-managed
