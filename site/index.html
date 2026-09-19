@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#0b0b0c">
+  <meta name="description" content="Cruxilion Codex：在 macOS 與 Linux 安全管理多個獨立 Codex CLI profile。">
+  <meta property="og:title" content="Cruxilion Codex">
+  <meta property="og:description" content="一台電腦，多個獨立 Codex CLI profile。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://install.cruxilion.com/">
+  <title>Cruxilion Codex — 多帳號 Codex CLI 管理</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Cruxilion Codex 首頁">
+      <span class="brand-mark">C</span>
+      <span>Cruxilion <strong>Codex</strong></span>
+    </a>
+    <nav aria-label="主要導覽">
+      <a href="#install">安裝</a>
+      <a href="#security">安全</a>
+      <a href="#downloads">下載</a>
+      <a href="https://github.com/yves01480/codex-switch" rel="noreferrer">GitHub</a>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="eyebrow">CODEX PROFILE MANAGER · v1.1.0</div>
+      <h1>一台電腦，<br><span>多個 Codex。</span></h1>
+      <p class="hero-copy">每個 <code>codexN</code> 都使用自己的 <code>CODEX_HOME</code>。可以同時登入、同時執行，不必交換 <code>auth.json</code>。</p>
+      <div class="badges" aria-label="系統需求">
+        <span>macOS</span><span>Linux</span><span>Python 3.9+</span><span>zsh / bash</span>
+      </div>
+      <div class="hero-actions">
+        <a class="button primary" href="#install">開始安裝</a>
+        <a class="button secondary" href="https://github.com/yves01480/codex-switch" rel="noreferrer">查看原始碼</a>
+      </div>
+    </section>
+
+    <aside class="device-note" aria-label="手機使用說明">
+      <div class="device-icon">⌁</div>
+      <div><strong>現在用手機？</strong><br>這個網站手機可正常瀏覽，但安裝指令要在 macOS / Linux 的 Terminal 執行，不是在 iPhone 上執行。</div>
+    </aside>
+
+    <section id="install" class="section">
+      <div class="section-kicker">INSTALL</div>
+      <h2>兩個步驟完成安裝</h2>
+      <p class="section-lead">預設建立 2 個 profile。把 <code>2</code> 改成你需要的數量，支援 1–99。</p>
+      <div class="terminal" data-copy-block>
+        <div class="terminal-bar">
+          <span class="terminal-label">Terminal</span>
+          <button class="copy-button" type="button" data-copy-button>複製指令</button>
+        </div>
+        <pre><code data-copy-text>curl -fsSL https://install.cruxilion.com/cruxilion-codex.sh -o /tmp/cruxilion-codex.sh
+sh /tmp/cruxilion-codex.sh --accounts 2
+export PATH="$HOME/.local/bin:$PATH"
+codex1 login
+codex2 login</code></pre>
+      </div>
+      <div class="install-grid">
+        <article><span class="step">01</span><h3>各自登入</h3><p><code>codex1 login</code>、<code>codex2 login</code> 分別登入自己的帳號。</p></article>
+        <article><span class="step">02</span><h3>各自執行</h3><p><code>codex1</code>、<code>codex2 resume</code> 可以同時執行，彼此資料目錄隔離。</p></article>
+        <article><span class="step">03</span><h3>隨時擴充</h3><p>使用 <code>codex-switch add codex3</code> 新增下一個 profile。</p></article>
+      </div>
+    </section>
+
+    <section class="section split">
+      <div>
+        <div class="section-kicker">WHY</div>
+        <h2>不是切換 token，<br>而是隔離 profile。</h2>
+      </div>
+      <div class="feature-list">
+        <div><strong>獨立 CODEX_HOME</strong><span>每個 profile 有自己的設定、session 與登入狀態。</span></div>
+        <div><strong>不碰登入憑證</strong><span>工具不讀取、不複製、不上傳，也不解析 <code>auth.json</code>。</span></div>
+        <div><strong>保留既有帳號</strong><span>可採用既有 <code>~/.codex</code> 與 <code>~/.codex-personal</code>，不搬移憑證。</span></div>
+        <div><strong>安全移除</strong><span><code>remove</code> 只停用；只有明確執行 <code>purge ... --yes</code> 才可能刪除工具建立的 profile。</span></div>
+      </div>
+    </section>
+    <section id="security" class="section">
+      <div class="section-kicker">SECURITY</div>
+      <h2>安裝前，可以先看清楚。</h2>
+      <p class="section-lead">安裝器與版本檔案都是靜態公開檔案。版本目錄提供 SHA-256，可自行下載、檢查，再執行。</p>
+      <div class="security-grid">
+        <a class="resource-card" href="/cruxilion-codex.sh"><span>Current installer</span><strong>查看 shell 安裝器 →</strong></a>
+        <a class="resource-card" href="/releases/1.1.0/SHA256SUMS"><span>Checksums</span><strong>SHA-256 驗證 →</strong></a>
+        <a class="resource-card" href="https://github.com/yves01480/codex-switch/blob/main/SECURITY.md" rel="noreferrer"><span>Security policy</span><strong>安全設計 →</strong></a>
+      </div>
+      <p class="fine-print">Cruxilion Codex / Codex Switch 是非官方社群工具，不隸屬於 OpenAI。</p>
+    </section>
+
+    <section id="downloads" class="section">
+      <div class="section-kicker">DOWNLOADS</div>
+      <div class="downloads-head">
+        <div><h2>版本 1.1.0</h2><p class="section-lead">目前穩定版本。歷史 1.0.0 仍保留於版本目錄。</p></div>
+        <span class="release-badge">Latest</span>
+      </div>
+      <div class="download-list">
+        <a href="/releases/1.1.0/codex-switch-v1.1.0.zip"><span><strong>完整下載包</strong><small>ZIP · 程式、安裝器、文件與測試</small></span><b>下載</b></a>
+        <a href="/releases/1.1.0/codex_accounts.py"><span><strong>codex_accounts.py</strong><small>核心 profile manager</small></span><b>查看</b></a>
+        <a href="/releases/1.1.0/README.md"><span><strong>README</strong><small>完整使用說明</small></span><b>閱讀</b></a>
+        <a href="/releases/1.1.0/SHA256SUMS"><span><strong>SHA256SUMS</strong><small>版本檔案完整性驗證</small></span><b>查看</b></a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div><strong>Cruxilion Codex</strong><span>Static delivery on Cloudflare Pages.</span></div>
+    <div class="footer-links">
+      <a href="/README.md">文件</a>
+      <a href="https://github.com/yves01480/codex-switch" rel="noreferrer">GitHub</a>
+      <a href="https://cruxilion.com">Cruxilion</a>
+    </div>
+  </footer>
+
+  <div class="toast" role="status" aria-live="polite" aria-hidden="true">已複製到剪貼簿</div>
+</body>
+</html>
